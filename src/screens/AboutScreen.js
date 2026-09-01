@@ -7,9 +7,9 @@ import { useLanguage } from '../context/LanguageContext';
  * This is the only place you need to change to update the About screen.
  */
 const DEVELOPER_INFO = {
-  name: 'Your Name',
-  email: 'your.email@example.com',
-  contact: '+92 3XX XXXXXXX',
+  name: 'Zain ul Abdin',
+  email: 'zainulabdin.2629@gmail.com',
+  contact: '+92 311 2275665',
 };
 
 export default function AboutScreen({ navigation }) {

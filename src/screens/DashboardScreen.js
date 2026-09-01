@@ -87,11 +87,18 @@ export default function DashboardScreen({ navigation }) {
           <TouchableOpacity
             style={styles.projectCard}
             onPress={() =>
-              navigation.navigate('Project', { projectId: item.id, projectName: item.name })
+              navigation.navigate('Project', {
+                projectId: item.id,
+                projectName: item.name,
+                projectCreatedAt: item.createdAt,
+              })
             }
             onLongPress={() => handleDeleteProject(item)}
           >
             <Text style={styles.projectName}>{item.name}</Text>
+            <Text style={styles.projectCreated}>
+              {t('createdLabel')}: {new Date(item.createdAt).toLocaleString()}
+            </Text>
             <Text style={styles.projectHint}>{t('tapHint')}</Text>
           </TouchableOpacity>
         )}
@@ -153,6 +160,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   projectName: { fontSize: 18, fontWeight: '600', color: '#1E2233' },
+  projectCreated: { fontSize: 11, color: '#8A8FA3', marginTop: 4 },
   projectHint: { fontSize: 12, color: '#A0A4B8', marginTop: 4 },
   fab: {
     position: 'absolute',

@@ -29,6 +29,8 @@ export const translations = {
     create: 'Create',
     save: 'Save',
     delete: 'Delete',
+    createdLabel: 'Created',
+    addedLabel: 'Added',
     deleteProjectTitle: 'Delete Project',
     deleteProjectMessage: 'Delete this project and all its entries?',
 
@@ -90,6 +92,8 @@ export const translations = {
     create: 'بنائیں',
     save: 'محفوظ کریں',
     delete: 'حذف کریں',
+    createdLabel: 'تخلیق شدہ',
+    addedLabel: 'شامل کیا گیا',
     deleteProjectTitle: 'پراجیکٹ حذف کریں',
     deleteProjectMessage: 'اس پراجیکٹ اور اس کی تمام اندراجات کو حذف کریں؟',
 

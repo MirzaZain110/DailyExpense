@@ -22,7 +22,7 @@ const FILTERS = ['all', 'income', 'expense'];
 
 export default function ProjectScreen({ route, navigation }) {
   const { t } = useLanguage();
-  const { projectId, projectName } = route.params;
+  const { projectId, projectName, projectCreatedAt } = route.params;
   const [entries, setEntries] = useState([]);
   const [modalType, setModalType] = useState(null); // 'income' | 'expense' | null
   const [editingEntry, setEditingEntry] = useState(null); // entry being edited, or null for a new one
@@ -151,6 +151,12 @@ export default function ProjectScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      {!!projectCreatedAt && (
+        <Text style={styles.projectCreatedText}>
+          {t('createdLabel')}: {new Date(projectCreatedAt).toLocaleString()}
+        </Text>
+      )}
+
       <View style={styles.summaryCard}>
         <View style={styles.summaryRow}>
           <View style={styles.summaryItem}>
@@ -222,7 +228,9 @@ export default function ProjectScreen({ route, navigation }) {
                   {item.person ? item.person : item.type === 'income' ? t('income') : t('expense')}
                 </Text>
                 {!!item.note && <Text style={styles.entryNote}>{item.note}</Text>}
-                <Text style={styles.entryDate}>{new Date(item.date).toLocaleString()}</Text>
+                <Text style={styles.entryDate}>
+                  {t('addedLabel')}: {new Date(item.date).toLocaleString()}
+                </Text>
               </View>
             </View>
 
@@ -327,6 +335,12 @@ export default function ProjectScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F5F6FA' },
+  projectCreatedText: {
+    fontSize: 11,
+    color: '#8A8FA3',
+    paddingHorizontal: 20,
+    paddingTop: 14,
+  },
   headerButton: { paddingHorizontal: 8, paddingVertical: 4 },
   summaryCard: {
     backgroundColor: '#fff',

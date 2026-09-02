@@ -124,3 +124,18 @@ export async function deleteEntry(projectId, entryId) {
   const filtered = entries.filter((e) => e.id !== entryId);
   await writeJsonFile(entriesFilePath(projectId), filtered);
 }
+
+export async function getLanguage() {
+  const info = await FileSystem.getInfoAsync(LANGUAGE_FILE);
+  if (!info.exists) return null;
+  try {
+    const content = await FileSystem.readAsStringAsync(LANGUAGE_FILE);
+    return content.trim() || null;
+  } catch (e) {
+    return null;
+  }
+}
+ 
+export async function saveLanguage(lang) {
+  await FileSystem.writeAsStringAsync(LANGUAGE_FILE, lang);
+}

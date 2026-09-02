@@ -1,29 +1,32 @@
 {
   "expo": {
     "name": "DailyExpense",
-    "slug": "DailyExpense",
+    "slug": "daily-expense",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/Icon.jpg",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./src/assets/Icon.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4C6FFF"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourname.dailyexpense"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./src/assets/Icon.jpg",
+        "backgroundColor": "#4C6FFF"
       },
-      "edgeToEdgeEnabled": true
+      "package": "com.zainulabdin.dailyexpense"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/Icon.jpg"
     }
   }
 }

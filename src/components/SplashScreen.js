@@ -36,7 +36,7 @@ export default function SplashScreen({ navigation }) {
     <View style={styles.container}>
       <Animated.View style={{ opacity: fade, transform: [{ scale }], alignItems: 'center' }}>
         <View style={styles.logoCircle}>
-          <Text style={styles.logoText}>₨</Text>
+          <Text style={styles.logoText}>$</Text>
         </View>
         <Text style={styles.appName}>Expense Tracker</Text>
         <Text style={styles.tagline}>Track. Save. Grow.</Text>

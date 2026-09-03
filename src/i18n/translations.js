@@ -45,6 +45,15 @@ export const translations = {
     email: 'Email',
     contact: 'Contact Number',
 
+    notifications: 'Notifications',
+    notificationsDescription: 'Get a daily reminder to log your income and expenses.',
+    dailyReminder: 'Daily reminder',
+    reminderTime: 'Reminder time',
+    notificationPermissionDenied:
+      'Please allow notifications for this app in your device settings to use this feature.',
+    reminderTitle: 'Update your expenses',
+    reminderBody: "Don't forget to log today's income and expenses.",
+
     income: 'Income',
     expense: 'Expense',
     balance: 'Balance',
@@ -107,6 +116,15 @@ export const translations = {
     name: 'نام',
     email: 'ای میل',
     contact: 'رابطہ نمبر',
+
+    notifications: 'اطلاعات',
+    notificationsDescription: 'اپنی آمدنی اور اخراجات درج کرنے کی روزانہ یاد دہانی حاصل کریں۔',
+    dailyReminder: 'روزانہ یاد دہانی',
+    reminderTime: 'یاد دہانی کا وقت',
+    notificationPermissionDenied:
+      'یہ خصوصیت استعمال کرنے کے لیے براہ کرم اپنی ڈیوائس کی ترتیبات میں اس ایپ کے لیے اطلاعات کی اجازت دیں۔',
+    reminderTitle: 'اپنے اخراجات اپ ڈیٹ کریں',
+    reminderBody: 'آج کی آمدنی اور اخراجات درج کرنا نہ بھولیں۔',
 
     income: 'آمدنی',
     expense: 'خرچ',

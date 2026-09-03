@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { LanguageProvider } from './src/context/LanguageContext';
+import { setupNotificationChannel } from './src/utils/Notifications';
 
 import SplashScreen from './src/components/SplashScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
@@ -14,6 +15,10 @@ import AboutScreen from './src/screens/AboutScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    setupNotificationChannel();
+  }, []);
+
   return (
     <LanguageProvider>
       <NavigationContainer>

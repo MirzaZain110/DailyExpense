@@ -10,10 +10,13 @@
  * as requested. You can open these files with any text editor if you
  * export them from the device.
  */
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 
 const DIR = FileSystem.documentDirectory;
 const PROJECTS_FILE = `${DIR}projects.txt`;
+const LANGUAGE_FILE = `${DIR}language.txt`;
+const NOTIFICATION_SETTINGS_FILE = `${DIR}notification_settings.txt`;
+const DEFAULT_NOTIFICATION_SETTINGS = { enabled: false, hour: 12, minute: 0 };
 
 const entriesFilePath = (projectId) => `${DIR}entries_${projectId}.txt`;
 
@@ -125,6 +128,8 @@ export async function deleteEntry(projectId, entryId) {
   await writeJsonFile(entriesFilePath(projectId), filtered);
 }
 
+/* ---------------- Language preference ---------------- */
+
 export async function getLanguage() {
   const info = await FileSystem.getInfoAsync(LANGUAGE_FILE);
   if (!info.exists) return null;
@@ -135,7 +140,27 @@ export async function getLanguage() {
     return null;
   }
 }
- 
+
 export async function saveLanguage(lang) {
   await FileSystem.writeAsStringAsync(LANGUAGE_FILE, lang);
+}
+
+/* ---------------- Daily reminder notification settings ---------------- */
+// Shape: { enabled: boolean, hour: number (0-23), minute: number (0-59) }
+// Defaults to disabled, 12:00 PM.
+
+export async function getNotificationSettings() {
+  const info = await FileSystem.getInfoAsync(NOTIFICATION_SETTINGS_FILE);
+  if (!info.exists) return { ...DEFAULT_NOTIFICATION_SETTINGS };
+  try {
+    const content = await FileSystem.readAsStringAsync(NOTIFICATION_SETTINGS_FILE);
+    const parsed = JSON.parse(content);
+    return { ...DEFAULT_NOTIFICATION_SETTINGS, ...parsed };
+  } catch (e) {
+    return { ...DEFAULT_NOTIFICATION_SETTINGS };
+  }
+}
+
+export async function saveNotificationSettings(settings) {
+  await FileSystem.writeAsStringAsync(NOTIFICATION_SETTINGS_FILE, JSON.stringify(settings));
 }

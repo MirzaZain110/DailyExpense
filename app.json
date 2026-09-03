@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "DailyExpense",
-    "slug": "daily-expense",
+    "slug": "zain-ul-abdin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/Icon.jpg",
+    "icon": "./src/assets/Icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/Icon.jpg",
+      "image": "./src/assets/Icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#4C6FFF"
     },
@@ -20,13 +20,23 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/Icon.jpg",
+        "foregroundImage": "./src/assets/Icon.png",
         "backgroundColor": "#4C6FFF"
       },
       "package": "com.zainulabdin.dailyexpense"
     },
     "web": {
-      "favicon": "./src/assets/Icon.jpg"
-    }
+      "favicon": "./src/assets/Icon.png"
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a94e4c53-9dfb-4127-8686-ce0f0ad029c4"
+      }
+    },
+    "owner": "zainulabdin2629s-team"
   }
 }

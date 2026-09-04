@@ -11,6 +11,7 @@ import {
   Modal,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { getEntries, addEntry, updateEntry, deleteEntry } from '../utils/storage';
 import { exportProjectToPdf } from '../utils/pdfExport';
@@ -22,6 +23,7 @@ const FILTERS = ['all', 'income', 'expense'];
 
 export default function ProjectScreen({ route, navigation }) {
   const { t } = useLanguage();
+  const insets = useSafeAreaInsets();
   const { projectId, projectName, projectCreatedAt } = route.params;
   const [entries, setEntries] = useState([]);
   const [modalType, setModalType] = useState(null); // 'income' | 'expense' | null
@@ -208,7 +210,7 @@ export default function ProjectScreen({ route, navigation }) {
       <FlatList
         data={filteredEntries}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 120, paddingHorizontal: 20 }}
+        contentContainerStyle={{ paddingBottom: 120 + insets.bottom, paddingHorizontal: 20 }}
         ListEmptyComponent={
           <Text style={styles.emptyText}>
             {entries.length === 0 ? t('noEntries') : t('noEntriesFiltered')}
@@ -265,7 +267,7 @@ export default function ProjectScreen({ route, navigation }) {
         )}
       />
 
-      <View style={styles.fabRow}>
+      <View style={[styles.fabRow, { bottom: 30 + insets.bottom }]}>
         <TouchableOpacity
           style={[styles.fab, { backgroundColor: '#E74C3C' }]}
           onPress={() => setModalType('expense')}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,19 @@ import {
   Modal,
   TextInput,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { getProjects, addProject, deleteProject } from '../utils/storage';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function DashboardScreen({ navigation }) {
   const { t } = useLanguage();
+  const insets = useSafeAreaInsets();
+  const projectNameInputRef = useRef(null);
   const [projects, setProjects] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [projectName, setProjectName] = useState('');
@@ -81,7 +86,7 @@ export default function DashboardScreen({ navigation }) {
       <FlatList
         data={projects}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 100 + insets.bottom }}
         ListEmptyComponent={<Text style={styles.emptyText}>{t('noProjects')}</Text>}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -104,15 +109,31 @@ export default function DashboardScreen({ navigation }) {
         )}
       />
 
-      <TouchableOpacity style={styles.fab} onPress={() => setModalVisible(true)}>
+      <TouchableOpacity
+        style={[styles.fab, { bottom: 36 + insets.bottom }]}
+        onPress={() => setModalVisible(true)}
+      >
         <Text style={styles.fabText}>+</Text>
       </TouchableOpacity>
 
-      <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalBox}>
+      <Modal
+        visible={modalVisible}
+        transparent
+        animationType="slide"
+        onShow={() => {
+          // autoFocus only fires on first mount; this modal stays mounted
+          // and is just shown/hidden, so we focus manually every time it opens.
+          setTimeout(() => projectNameInputRef.current?.focus(), 150);
+        }}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={styles.modalOverlay}
+        >
+          <View style={[styles.modalBox, { paddingBottom: 24 + insets.bottom }]}>
             <Text style={styles.modalTitle}>{t('newProject')}</Text>
             <TextInput
+              ref={projectNameInputRef}
               style={styles.input}
               placeholder={t('projectNamePlaceholder')}
               value={projectName}
@@ -137,7 +158,7 @@ export default function DashboardScreen({ navigation }) {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   );

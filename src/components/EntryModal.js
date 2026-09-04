@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Alert,
   KeyboardAvoidingView,
+  ScrollView,
   Platform,
 } from 'react-native';
 import { useLanguage } from '../context/LanguageContext';
@@ -24,6 +25,7 @@ import { useLanguage } from '../context/LanguageContext';
  */
 export default function EntryModal({ visible, type, initialValues, onClose, onSave }) {
   const { t } = useLanguage();
+  const amountInputRef = useRef(null);
   const [amount, setAmount] = useState('');
   const [person, setPerson] = useState('');
   const [note, setNote] = useState('');
@@ -71,16 +73,32 @@ export default function EntryModal({ visible, type, initialValues, onClose, onSa
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="slide"
+      onRequestClose={onClose}
+      onShow={() => {
+        // autoFocus only fires on first mount; this modal stays mounted
+        // and is just shown/hidden, so we focus manually every time it opens.
+        setTimeout(() => amountInputRef.current?.focus(), 150);
+      }}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.overlay}
       >
-        <View style={styles.box}>
+        <ScrollView
+          style={styles.scrollArea}
+          contentContainerStyle={styles.box}
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
+        >
           <Text style={[styles.title, { color: accentColor }]}>{titleText}</Text>
 
           <Text style={styles.label}>{t('amountLabel')}</Text>
           <TextInput
+            ref={amountInputRef}
             style={styles.input}
             placeholder="0.00"
             keyboardType="numeric"
@@ -118,7 +136,7 @@ export default function EntryModal({ visible, type, initialValues, onClose, onSa
               <Text style={styles.saveText}>{isEditing ? t('update') : t('save')}</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </Modal>
   );
@@ -126,6 +144,7 @@ export default function EntryModal({ visible, type, initialValues, onClose, onSa
 
 const styles = StyleSheet.create({
   overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'flex-end' },
+  scrollArea: { maxHeight: '85%' },
   box: { backgroundColor: '#fff', borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 24 },
   title: { fontSize: 18, fontWeight: '700', marginBottom: 12 },
   label: { fontSize: 13, color: '#6B7080', marginBottom: 6, marginTop: 10 },

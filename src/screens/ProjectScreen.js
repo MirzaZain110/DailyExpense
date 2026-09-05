@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,10 +13,11 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { getEntries, addEntry, updateEntry, deleteEntry } from '../utils/storage';
+import { getEntries, addEntry, updateEntry, deleteEntry, isTourSeen } from '../utils/storage';
 import { exportProjectToPdf } from '../utils/pdfExport';
 import EntryModal from '../components/EntryModal';
 import SimpleBarChart from '../components/SimpleBarChart';
+import FeatureTour from '../components/FeatureTour';
 import { useLanguage } from '../context/LanguageContext';
 
 const FILTERS = ['all', 'income', 'expense'];
@@ -32,6 +33,7 @@ export default function ProjectScreen({ route, navigation }) {
   const [searchText, setSearchText] = useState('');
   const [exporting, setExporting] = useState(false);
   const [exportPickerVisible, setExportPickerVisible] = useState(false);
+  const [showTour, setShowTour] = useState(false);
 
   const loadEntries = useCallback(async () => {
     const data = await getEntries(projectId);
@@ -104,6 +106,12 @@ export default function ProjectScreen({ route, navigation }) {
         ),
       });
       loadEntries();
+      // Re-checked every time this screen gains focus (not just on first
+      // mount) so the "Take the tour again" button in Settings works.
+      (async () => {
+        const seen = await isTourSeen('project');
+        if (!seen) setShowTour(true);
+      })();
     }, [loadEntries, navigation, projectName, openExportPicker, exporting])
   );
 
@@ -331,6 +339,18 @@ export default function ProjectScreen({ route, navigation }) {
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
+
+      <FeatureTour
+        tourKey="project"
+        visible={showTour}
+        onDone={() => setShowTour(false)}
+        steps={[
+          { title: t('tourProjectAddEntryTitle'), text: t('tourProjectAddEntryText') },
+          { title: t('tourProjectFilterTitle'), text: t('tourProjectFilterText') },
+          { title: t('tourProjectEditTitle'), text: t('tourProjectEditText') },
+          { title: t('tourProjectExportTitle'), text: t('tourProjectExportText') },
+        ]}
+      />
     </View>
   );
 }

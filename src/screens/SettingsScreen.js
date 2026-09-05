@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Switch, Alert, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useLanguage } from '../context/LanguageContext';
-import { getNotificationSettings, saveNotificationSettings } from '../utils/storage';
+import { getNotificationSettings, saveNotificationSettings, resetTour } from '../utils/storage';
 import {
   requestNotificationPermissions,
   scheduleDailyReminder,
@@ -62,6 +62,14 @@ export default function SettingsScreen({ navigation }) {
 
     const updated = { ...notif, hour: selectedDate.getHours(), minute: selectedDate.getMinutes() };
     await persistAndApply(updated);
+  };
+
+  const handleRetakeTour = async () => {
+    // Resets both tours; the Dashboard one shows immediately on
+    // navigating back, the Project one next time any project is opened.
+    await resetTour('dashboard');
+    await resetTour('project');
+    navigation.navigate('Dashboard');
   };
 
   if (!loaded) return <View style={styles.container} />;
@@ -153,6 +161,29 @@ export default function SettingsScreen({ navigation }) {
           <Text style={styles.chevron}>›</Text>
         </View>
       </TouchableOpacity>
+
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>{t('help')}</Text>
+
+        <TouchableOpacity style={styles.helpRow} onPress={handleRetakeTour}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.helpRowTitle}>{t('retakeTourTitle')}</Text>
+            <Text style={styles.helpRowDescription}>{t('retakeTourDescription')}</Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.helpRow, styles.helpRowLast]}
+          onPress={() => navigation.navigate('FAQ')}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={styles.helpRowTitle}>{t('faqTitle')}</Text>
+            <Text style={styles.helpRowDescription}>{t('faqDescription')}</Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -185,6 +216,17 @@ const styles = StyleSheet.create({
   languageTextActive: { color: '#fff' },
   aboutRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   chevron: { fontSize: 22, color: '#B0B4C4', marginLeft: 10 },
+  helpRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+    paddingTop: 14,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F1F5',
+  },
+  helpRowLast: {},
+  helpRowTitle: { fontSize: 14, fontWeight: '600', color: '#1E2233' },
+  helpRowDescription: { fontSize: 12, color: '#8A8FA3', marginTop: 2, lineHeight: 17 },
   notifHeaderRow: { flexDirection: 'row', alignItems: 'flex-start' },
   timeRow: {
     flexDirection: 'row',

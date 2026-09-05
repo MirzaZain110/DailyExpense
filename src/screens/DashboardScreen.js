@@ -14,8 +14,9 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { getProjects, addProject, deleteProject } from '../utils/storage';
+import { getProjects, addProject, deleteProject, isTourSeen } from '../utils/storage';
 import { useLanguage } from '../context/LanguageContext';
+import FeatureTour from '../components/FeatureTour';
 
 export default function DashboardScreen({ navigation }) {
   const { t } = useLanguage();
@@ -24,6 +25,7 @@ export default function DashboardScreen({ navigation }) {
   const [projects, setProjects] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [projectName, setProjectName] = useState('');
+  const [showTour, setShowTour] = useState(false);
 
   // Header title + settings (gear) button, kept in sync with the
   // currently selected language.
@@ -50,6 +52,14 @@ export default function DashboardScreen({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       loadProjects();
+      // Re-checked every time this screen gains focus (not just on first
+      // mount) so the "Take the tour again" button in Settings works —
+      // resetting the flag there and navigating back here needs this to
+      // re-run, which a mount-only effect wouldn't do.
+      (async () => {
+        const seen = await isTourSeen('dashboard');
+        if (!seen) setShowTour(true);
+      })();
     }, [loadProjects])
   );
 
@@ -160,6 +170,22 @@ export default function DashboardScreen({ navigation }) {
           </View>
         </KeyboardAvoidingView>
       </Modal>
+
+      <FeatureTour
+        tourKey="dashboard"
+        visible={showTour}
+        onDone={() => setShowTour(false)}
+        steps={[
+          {
+            title: t('tourDashboardAddProjectTitle'),
+            text: t('tourDashboardAddProjectText'),
+          },
+          {
+            title: t('tourDashboardSettingsTitle'),
+            text: t('tourDashboardSettingsText'),
+          },
+        ]}
+      />
     </View>
   );
 }

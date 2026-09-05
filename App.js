@@ -12,6 +12,7 @@ import DashboardScreen from './src/screens/DashboardScreen';
 import ProjectScreen from './src/screens/ProjectScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import AboutScreen from './src/screens/AboutScreen';
+import FAQScreen from './src/screens/FAQScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ export default function App() {
             <Stack.Screen name="Project" component={ProjectScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="About" component={AboutScreen} />
+            <Stack.Screen name="FAQ" component={FAQScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>

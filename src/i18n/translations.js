@@ -4,6 +4,53 @@
  */
 export const translations = {
   en: {
+    tourNext: 'Next',
+    tourGotIt: 'Got it',
+    tourSkip: 'Skip',
+    tourDashboardAddProjectTitle: 'Create a project',
+    tourDashboardAddProjectText:
+      'Tap the + button to start a new project. Each project keeps its own income and expenses separate — e.g. one for "Daily Expense", another for "Office Expense".',
+    tourDashboardSettingsTitle: 'Settings',
+    tourDashboardSettingsText:
+      'Tap the gear icon in the top-right corner to change the app language or set up a daily reminder to log your expenses.',
+    tourProjectAddEntryTitle: 'Add a transaction',
+    tourProjectAddEntryText:
+      'Use the − Expense and + Income buttons at the bottom to log money going out or coming in.',
+    tourProjectFilterTitle: 'Filter & search',
+    tourProjectFilterText:
+      'Use these chips to show only income or only expenses, or search by person or note to find something quickly.',
+    tourProjectEditTitle: 'Edit or delete an entry',
+    tourProjectEditText:
+      'Made a mistake? Tap the pencil icon on any entry to fix it, or the trash icon to remove it.',
+    tourProjectExportTitle: 'Export as PDF',
+    tourProjectExportText:
+      'Tap the document icon in the top-right corner to export your transactions as a formal PDF statement — you can choose to export all, only income, or only expenses.',
+
+    help: 'Help',
+    retakeTourTitle: 'Take the tour again',
+    retakeTourDescription: "Replay the quick walkthrough of the app's main features.",
+    faqTitle: 'Frequently Asked Questions',
+    faqDescription: 'Answers to common questions about using the app.',
+    faqScreenTitle: 'FAQ',
+    faq1Q: 'How do I create a new project?',
+    faq1A: 'On the Dashboard, tap the + button in the bottom-right corner and give your project a name.',
+    faq2Q: 'How do I add an expense or income?',
+    faq2A: 'Open a project, then tap the − Expense or + Income button at the bottom of the screen.',
+    faq3Q: 'How do I fix a mistake in an entry?',
+    faq3A: 'Tap the pencil icon next to any entry to edit it, or the trash icon to delete it.',
+    faq4Q: 'How do I export my data as a PDF?',
+    faq4A: 'Inside a project, tap the document icon in the top-right corner and choose which transactions to include — All, Income, or Expense.',
+    faq5Q: 'How do I filter or search entries?',
+    faq5A: 'Use the All / Income / Expense chips or the search box near the top of a project screen.',
+    faq6Q: 'How do I change the app language?',
+    faq6A: 'Go to Settings and choose English or Urdu — it applies immediately throughout the app.',
+    faq7Q: 'How do I get a daily reminder to log expenses?',
+    faq7A: 'Go to Settings, turn on Daily reminder, and pick a time. You can change or turn it off anytime.',
+    faq8Q: 'Is my data stored online?',
+    faq8A: 'No — everything is stored locally on your device only. Nothing is uploaded anywhere.',
+    faq9Q: 'How do I delete a project?',
+    faq9A: 'On the Dashboard, press and hold a project card, then confirm. This also deletes all of its entries permanently.',
+
     update: 'Update',
     editExpenseTitle: 'Edit Expense',
     editIncomeTitle: 'Edit Income',
@@ -76,6 +123,53 @@ export const translations = {
   },
 
   ur: {
+    tourNext: 'اگلا',
+    tourGotIt: 'سمجھ آ گیا',
+    tourSkip: 'نظر انداز کریں',
+    tourDashboardAddProjectTitle: 'پراجیکٹ بنائیں',
+    tourDashboardAddProjectText:
+      'نیا پراجیکٹ شروع کرنے کے لیے + بٹن دبائیں۔ ہر پراجیکٹ اپنی آمدنی اور اخراجات الگ رکھتا ہے — مثلاً ایک "روزانہ اخراجات" کے لیے، دوسرا "دفتر کے اخراجات" کے لیے۔',
+    tourDashboardSettingsTitle: 'ترتیبات',
+    tourDashboardSettingsText:
+      'اوپر دائیں کونے میں گیئر آئیکن دبا کر ایپ کی زبان تبدیل کریں یا اخراجات درج کرنے کی روزانہ یاد دہانی ترتیب دیں۔',
+    tourProjectAddEntryTitle: 'اندراج شامل کریں',
+    tourProjectAddEntryText:
+      'نیچے دیے گئے − خرچ اور + آمدنی بٹن استعمال کر کے رقم کا لین دین درج کریں۔',
+    tourProjectFilterTitle: 'فلٹر اور تلاش',
+    tourProjectFilterText:
+      'صرف آمدنی یا صرف خرچ دکھانے کے لیے یہ چپس استعمال کریں، یا شخص یا نوٹ سے تلاش کریں۔',
+    tourProjectEditTitle: 'اندراج میں ترمیم یا حذف کریں',
+    tourProjectEditText:
+      'غلطی ہو گئی؟ کسی بھی اندراج پر پنسل آئیکن دبا کر درست کریں، یا ٹریش آئیکن سے حذف کریں۔',
+    tourProjectExportTitle: 'PDF کے طور پر برآمد کریں',
+    tourProjectExportText:
+      'اوپر دائیں کونے میں دستاویز آئیکن دبا کر اپنے لین دین کو باقاعدہ PDF کے طور پر برآمد کریں — آپ تمام، صرف آمدنی، یا صرف خرچ منتخب کر سکتے ہیں۔',
+
+    help: 'مدد',
+    retakeTourTitle: 'دوبارہ ٹور دیکھیں',
+    retakeTourDescription: 'ایپ کی اہم خصوصیات کا مختصر جائزہ دوبارہ دیکھیں۔',
+    faqTitle: 'اکثر پوچھے گئے سوالات',
+    faqDescription: 'ایپ استعمال کرنے سے متعلق عام سوالات کے جوابات۔',
+    faqScreenTitle: 'عمومی سوالات',
+    faq1Q: 'میں نیا پراجیکٹ کیسے بناؤں؟',
+    faq1A: 'ڈیش بورڈ پر، نیچے دائیں کونے میں + بٹن دبائیں اور اپنے پراجیکٹ کا نام درج کریں۔',
+    faq2Q: 'میں خرچ یا آمدنی کیسے شامل کروں؟',
+    faq2A: 'ایک پراجیکٹ کھولیں، پھر اسکرین کے نیچے − خرچ یا + آمدنی بٹن دبائیں۔',
+    faq3Q: 'اگر اندراج میں غلطی ہو جائے تو کیا کروں؟',
+    faq3A: 'کسی بھی اندراج کے ساتھ پنسل آئیکن دبا کر اسے درست کریں، یا ٹریش آئیکن سے حذف کریں۔',
+    faq4Q: 'میں اپنا ڈیٹا PDF کے طور پر کیسے برآمد کروں؟',
+    faq4A: 'پراجیکٹ کے اندر، اوپر دائیں کونے میں دستاویز آئیکن دبائیں اور منتخب کریں کہ کون سے لین دین شامل کرنے ہیں — تمام، آمدنی، یا خرچ۔',
+    faq5Q: 'میں اندراجات کو کیسے فلٹر یا تلاش کروں؟',
+    faq5A: 'پراجیکٹ اسکرین کے اوپر تمام / آمدنی / خرچ چپس یا سرچ باکس استعمال کریں۔',
+    faq6Q: 'میں ایپ کی زبان کیسے تبدیل کروں؟',
+    faq6A: 'ترتیبات میں جائیں اور انگریزی یا اردو منتخب کریں — یہ فوری طور پر پوری ایپ میں لاگو ہو جاتا ہے۔',
+    faq7Q: 'اخراجات درج کرنے کی روزانہ یاد دہانی کیسے حاصل کروں؟',
+    faq7A: 'ترتیبات میں جائیں، روزانہ یاد دہانی آن کریں، اور وقت منتخب کریں۔ آپ اسے کسی بھی وقت تبدیل یا بند کر سکتے ہیں۔',
+    faq8Q: 'کیا میرا ڈیٹا آن لائن محفوظ ہوتا ہے؟',
+    faq8A: 'نہیں — ہر چیز صرف آپ کی ڈیوائس پر مقامی طور پر محفوظ ہوتی ہے۔ کچھ بھی کہیں اپ لوڈ نہیں ہوتا۔',
+    faq9Q: 'میں پراجیکٹ کیسے حذف کروں؟',
+    faq9A: 'ڈیش بورڈ پر، کسی پراجیکٹ کارڈ کو دبا کر رکھیں، پھر تصدیق کریں۔ اس سے اس کی تمام اندراجات بھی مستقل طور پر حذف ہو جائیں گی۔',
+
     update: 'اپ ڈیٹ کریں',
     editExpenseTitle: 'خرچ میں ترمیم کریں',
     editIncomeTitle: 'آمدنی میں ترمیم کریں',

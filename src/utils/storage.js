@@ -19,6 +19,7 @@ const NOTIFICATION_SETTINGS_FILE = `${DIR}notification_settings.txt`;
 const DEFAULT_NOTIFICATION_SETTINGS = { enabled: false, hour: 12, minute: 0 };
 
 const entriesFilePath = (projectId) => `${DIR}entries_${projectId}.txt`;
+const tourFilePath = (key) => `${DIR}tour_${key}.txt`;
 
 function makeId() {
   return `${Date.now()}_${Math.floor(Math.random() * 100000)}`;
@@ -163,4 +164,28 @@ export async function getNotificationSettings() {
 
 export async function saveNotificationSettings(settings) {
   await FileSystem.writeAsStringAsync(NOTIFICATION_SETTINGS_FILE, JSON.stringify(settings));
+}
+
+/* ---------------- Feature tour tracking ---------------- */
+// Generic "has this popup tour been seen" flag, keyed by an arbitrary
+// string (e.g. "dashboard", "project") so each screen's tour is
+// tracked independently and only ever shown once.
+
+export async function isTourSeen(key) {
+  const info = await FileSystem.getInfoAsync(tourFilePath(key));
+  return info.exists;
+}
+
+export async function markTourSeen(key) {
+  await FileSystem.writeAsStringAsync(tourFilePath(key), 'true');
+}
+
+/** Clears a tour's "seen" flag so it will show again — used by the
+ * "Take the tour again" button in Settings. */
+export async function resetTour(key) {
+  const path = tourFilePath(key);
+  const info = await FileSystem.getInfoAsync(path);
+  if (info.exists) {
+    await FileSystem.deleteAsync(path);
+  }
 }
